@@ -1,1 +1,93 @@
+# Maygan Book
+# March 4/2025
+# Python Assignment 
+# The dice game 
 
+import pygame, sys 
+import random
+pygame.display.init()
+
+# setting screen size 
+
+screen = pygame.display.set_mode((400, 300))
+
+# Loading images 
+die1_image = "dice1.png"
+die2_image = "dice2.png"    
+die3_image = "dice3.png"
+die4_image = "dice4.png"
+die5_image = "dice5.png"
+die6_image = "dice6.png"
+
+dieimage1 = pygame.image.load(die1_image)
+dieimage2 = pygame.image.load(die2_image)
+dieimage3 = pygame.image.load(die3_image)
+dieimage4 = pygame.image.load(die4_image)
+dieimage5 = pygame.image.load(die5_image)
+dieimage6 = pygame.image.load(die6_image)
+
+def display_dice(dieimage1, dieimage2, dieimage3, dieimage4, dieimage5, dieimage6, die1, die2):
+    """Display the dice images based on the rolled values."""
+    if die1 ==1: 
+        screen.blit(dieimage1, (0,0))
+    if die1 ==2: 
+        screen.blit(dieimage2, (0,0))
+    if die1 ==3: 
+        screen.blit(dieimage3, (0,0))
+    if die1 ==4: 
+        screen.blit(dieimage4, (0,0))
+    if die1 ==5: 
+        screen.blit(dieimage5, (0,0))
+    if die1 ==6: 
+        screen.blit(dieimage6, (0,0))
+    if die2 ==1: 
+        screen.blit(dieimage1, (200,0))
+    if die2 ==2: 
+        screen.blit(dieimage2, (200,0))
+    if die2 ==3: 
+        screen.blit(dieimage3, (200,0))
+    if die2 ==4: 
+        screen.blit(dieimage4, (200,0))
+    if die2 ==5: 
+        screen.blit(dieimage5, (200,0))
+    if die2 ==6: 
+        screen.blit(dieimage6, (200,0))
+    pygame.display.update()
+
+
+playagain = "y"
+while playagain=="y":
+    import random  
+    total=0
+    numrolls=0
+    while total <100 and numrolls <=20:
+
+        for event in pygame.event.get():
+        
+            if event.type == pygame.QUIT:
+
+                sys.exit()
+
+        while numrolls < 20:
+            input("Press Enter to roll the dice...")
+            die1=random.randint(1,6) 
+            die2=random.randint(1,6)
+            print (die1, die2)
+            display_dice(dieimage1, dieimage2, dieimage3, dieimage4, dieimage5, dieimage6, die1, die2)
+            pygame.display.update()
+            numrolls += 1
+            print("num rolls:", numrolls)
+            roll_sum = die1 + die2
+            if die1==die2:
+                total -= roll_sum
+                print(f"Rolled {die1} and {die2} (are the same!). Subtracting {roll_sum} from total.")
+            else:
+                total += roll_sum
+                print(f"Rolled {die1} and {die2}.(are different.). Adding {roll_sum} to total.")
+            print("total", total)
+            
+        if total >100:
+            print(" congrats you won!")
+        else:
+            print(" you lost the game") 
+        playagain = input(" Do you want to play the game again? (y/n): ")
